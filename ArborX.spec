@@ -1,3 +1,4 @@
+# Stolen from eigen spec
 # The (empty) main package is arch, to have the package built and tests run
 # on all arches, but the actual result package is the noarch -devel subpackge.
 # Debuginfo packages are disabled to prevent rpmbuild from generating an empty
@@ -74,8 +75,8 @@ for mpi in '' mpich openmpi; do
   test -n "${mpi}" && module load mpi/${mpi}-%{_arch}
   %cmake \
     -DARBORX_ENABLE_TESTS=ON \
-    -DARBORX_ENABLE_EXAMPLES=ON \
-    -DARBORX_ENABLE_BENCHMARKS=ON \
+    -DARBORX_ENABLE_EXAMPLES=OFF \
+    -DARBORX_ENABLE_BENCHMARKS=OFF \
     $(test -z "${mpi}" && echo -DARBORX_ENABLE_MPI=OFF || echo -DARBORX_ENABLE_MPI=ON) \
     -DCMAKE_INSTALL_DATADIR=${MPI_LIB:-%{_datadir}} \
     -DCMAKE_INSTALL_INCLUDEDIR=${MPI_INCLUDE:-%{_includedir}} \
