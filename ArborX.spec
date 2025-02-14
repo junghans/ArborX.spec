@@ -17,8 +17,6 @@ ExcludeArch: i686 armv7hl s390x
 License:        BSD-3-Clause
 URL:            https://github.com/arborx/%{name}
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-# fix install location, merged upstream
-Patch0:         %{url}/pull/1174.diff
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake >= 3.16
@@ -64,7 +62,7 @@ Requires:   mpich-devel
 This package contains mpich development files of %{name}.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-master
 
 %build
 # save memory
