@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches:
+      - rawhide
+  pull_request:
+    branches:
+      - rawhide
+
+concurrency:
+  group: ${ {github.event_name }}-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true 
+
+jobs:
+  CI:
+    runs-on: ubuntu-24.04-arm
+    ontainer:
+      image: fedora:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build rpm
+        run: |
+          dnf -y install wget fedpkg
+          dnf -y builddep ArborX.spec
+          ./get_master
+          fedpkg srpm
+          fedpkg local
