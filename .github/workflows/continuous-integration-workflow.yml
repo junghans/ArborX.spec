@@ -28,4 +28,7 @@ jobs:
           ./get_master.sh
           fedpkg srpm
       - name: Build rpm
-        run: fedpkg local
+        run: |
+          . /etc/profile.d/00-modulepath.sh
+          module avail
+          fedpkg local
