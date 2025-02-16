@@ -15,7 +15,7 @@ jobs:
   CI:
     runs-on: ubuntu-24.04-arm
     container:
-      image: fedora:latest
+      image: registry.fedoraproject.org/fedora:rawhide
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,6 +29,5 @@ jobs:
           fedpkg srpm
       - name: Build rpm
         run: |
-          . /etc/profile.d/00-modulepath.sh
           module avail
           fedpkg local
