@@ -15,14 +15,14 @@ jobs:
   CI:
     runs-on: ubuntu-24.04-arm
     container:
-      image: registry.fedoraproject.org/fedora:latest
+      image: ghcr.io/kokkos/ci-containers/fedora:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Build fedpg and friends
-        run: dnf -y install wget fedpkg Lmod
+        run: sudo dnf -y install wget fedpkg Lmod
       - name: Install Deps
-        run:  dnf -y builddep ArborX.spec
+        run:  sudo dnf -y builddep ArborX.spec
       - name: Make SRPM
         run: |
           ./get_master.sh
