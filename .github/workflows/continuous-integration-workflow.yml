@@ -29,6 +29,6 @@ jobs:
           fedpkg srpm
       - name: Build rpm
         run: |
-          . /etc/profile.d/00-modulepath.sh
+          . /etc/profile.d/modules.sh 
           module avail
           fedpkg local
