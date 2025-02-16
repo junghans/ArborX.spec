@@ -15,12 +15,12 @@ jobs:
   CI:
     runs-on: ubuntu-24.04-arm
     container:
-      image: registry.fedoraproject.org/fedora:42
+      image: registry.fedoraproject.org/fedora:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Build fedpg and friends
-        run: dnf -y install wget fedpkg
+        run: dnf -y install wget fedpkg Lmod
       - name: Install Deps
         run:  dnf -y builddep ArborX.spec
       - name: Make SRPM
@@ -29,5 +29,6 @@ jobs:
           fedpkg srpm
       - name: Build rpm
         run: |
+          . /etc/profile.d/00-modulepath.sh
           module avail
           fedpkg local
