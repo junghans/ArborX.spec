@@ -19,10 +19,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build rpm
+      - name: Build fedpg and friends
+        run: dnf -y install wget fedpkg
+      - name: Install Deps
+        run:  dnf -y builddep ArborX.spec
+      - name: Make SRPM
         run: |
-          dnf -y install wget fedpkg
-          dnf -y builddep ArborX.spec
-          ./get_master
+          ./get_master.sh
           fedpkg srpm
-          fedpkg local
+      - name: Build rpm
+        run: fedpkg local
