@@ -20,7 +20,7 @@ jobs:
       - name: Build new image and Load it into Docker for testing
         uses: docker/build-push-action@v6
         with:
-          tags: ArborX:latest
+          tags: mockenv:latest
           file: Dockerfile
           pull: true
           push: false
@@ -29,6 +29,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Build and Test Kokkos using updated image
         run: |
-          docker run -t --rm -v ${{ github.workspace }}/ArborX:/ArborX -w /ArborX ArborX:latest \
+          docker run -t --rm -v ${{ github.workspace }}/ArborX:/ArborX -w /ArborX mockenv:latest \
             sh -c \
               "fedpkg --name ArborX mockbuild"
