@@ -15,20 +15,15 @@ jobs:
   CI:
     runs-on: ubuntu-24.04-arm
     container:
-      image: ghcr.io/kokkos/ci-containers/fedora:rawhide
+      image: registry.fedoraproject.org/fedora:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build fedpg and friends
-        run: sudo dnf -y install wget fedpkg Lmod
-      - name: Install Deps
-        run:  sudo dnf -y builddep ArborX.spec
+      - name: Build fedpkg
+        run: sudo dnf -y install fedpkg
       - name: Make SRPM
         run: |
           ./get_master.sh
           fedpkg srpm
       - name: Build rpm
-        run: |
-          . /etc/profile.d/modules.sh 
-          module avail
-          fedpkg local
+        run: fedpkg --name ArborX mockbuild
