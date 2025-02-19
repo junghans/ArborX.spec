@@ -31,4 +31,4 @@ jobs:
         run: |
           docker run --privileged -t --rm -v ${{ github.workspace }}:/ArborX -w /ArborX mockenv:latest \
             sh -c \
-              "./get_master.sh && fedpkg --name ArborX mockbuild"
+              "./get_master.sh && fedpkg --debug --verbose --name ArborX mockbuild"
