@@ -29,6 +29,6 @@ jobs:
           load: true
       - name: Build and Test Kokkos using updated image
         run: |
-          docker run -t --rm -v ${{ github.workspace }}/ArborX:/ArborX -w /ArborX mockenv:latest \
+          docker run -t --rm -v ${{ github.workspace }}:/ArborX -w /ArborX mockenv:latest \
             sh -c \
               "fedpkg --name ArborX mockbuild"
