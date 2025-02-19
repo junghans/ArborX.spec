@@ -15,13 +15,13 @@ jobs:
   CI:
     runs-on: ubuntu-24.04-arm
     container:
-      image: registry.fedoraproject.org/fedora:latest
+      image: ghcr.io/kokkos/ci-containers/fedora:latest 
       options: --privileged
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Build fedpkg
-        run: dnf -y install fedpkg
+        run: sudo dnf -y install fedpkg
       - name: Make SRPM
         run: |
           ./get_master.sh
