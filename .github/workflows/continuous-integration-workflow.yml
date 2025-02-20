@@ -29,6 +29,6 @@ jobs:
           load: true
       - name: Build and Test Kokkos using updated image
         run: |
-          docker run --privileged -t --rm -v ${{ github.workspace }}:/ArborX -w /ArborX mockenv:latest \
+          docker run --privileged --cap-add=SYS_ADMIN -t --rm -v ${{ github.workspace }}:/ArborX -w /ArborX mockenv:latest \
             sh -c \
-              "./get_master.sh && fedpkg --debug --verbose --name ArborX mockbuild"
+              "ls -alh /usr/sbin/userhelper && ./get_master.sh && fedpkg --debug --verbose --name ArborX mockbuild"
