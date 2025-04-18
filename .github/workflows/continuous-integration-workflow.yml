@@ -15,7 +15,7 @@ jobs:
   CI:
     runs-on: ubuntu-24.04-arm
     container:
-      image: registry.fedoraproject.org/fedora:latest
+      image: registry.fedoraproject.org/fedora:rawhide
       options: --privileged
     steps:
       - name: Checkout code
