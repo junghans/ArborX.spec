@@ -14,21 +14,19 @@ concurrency:
 jobs:
   CI:
     runs-on: ubuntu-24.04-arm
+    container:
+      image: registry.fedoraproject.org/fedora:latest
+      options: --privileged
     steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build new image and Load it into Docker for testing
-        uses: docker/build-push-action@v6
-        with:
-          tags: mockenv:latest
-          file: Dockerfile
-          pull: true
-          push: false
-          load: true
-      - name: Build and Test Kokkos using updated image
+      - name: Build fedpkg
+        run: sudo dnf -y install fedpkg
+      - name: Install Deps
+        run:  sudo dnf -y builddep ArborX.spec
+      - name: Make SRPM
         run: |
-          docker run --privileged --cap-add=SYS_ADMIN -t --rm -v ${{ github.workspace }}:/ArborX -w /ArborX mockenv:latest \
-            sh -c \
-              "ls -alh /usr/sbin/userhelper && ./get_master.sh && fedpkg --debug --verbose --name ArborX mockbuild"
+          spectool -g ArborX.spec
+          fedpkg srpm
+      - name: Build rpm
+        run: fedpkg local 
