@@ -29,4 +29,7 @@ jobs:
           spectool -g ArborX.spec
           fedpkg srpm
       - name: Build rpm
-        run: fedpkg local 
+        run: |
+          . /etc/profile.d/modules.sh
+          module avail
+          fedpkg local 
