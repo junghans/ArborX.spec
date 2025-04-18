@@ -6,7 +6,7 @@
 %global debug_package %{nil}
 
 Name:           ArborX
-Version:        1.7
+Version:        2.0
 %global         sover 0
 Release:        1%{?dist}
 Summary:        Performance-portable geometric search library
@@ -62,7 +62,7 @@ Requires:   mpich-devel
 This package contains mpich development files of %{name}.
 
 %prep
-%autosetup -p1 -n %{name}-master
+%autosetup -p1
 
 %build
 # save memory
@@ -116,6 +116,9 @@ done
 %{_libdir}/mpich*/lib/cmake/%{name}
 
 %changelog
+* Thu Apr 17 2025 Christoph Junghans <junghans@votca.org> - 2.0-1
+- Version bump to v2.0
+
 * Wed Oct 02 2024 Christoph Junghans <junghans@votca.org> - 0.7.0-1
 - Initial commit
 
