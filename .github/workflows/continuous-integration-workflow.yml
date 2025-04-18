@@ -29,6 +29,9 @@ jobs:
           spectool -g ArborX.spec
           fedpkg srpm
       - name: Build rpm
+        env:
+          OMPI_ALLOW_RUN_AS_ROOT: 1 
+          OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
         run: |
           . /etc/profile.d/modules.sh
           module avail
