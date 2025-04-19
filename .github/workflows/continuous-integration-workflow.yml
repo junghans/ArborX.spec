@@ -26,3 +26,8 @@ jobs:
         run: spectool -g ArborX.spec
       - name: Build rpm
         run:  fedpkg mockbuild --use-koji-mock-config
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: mock-results
+          path: results_ArborX
