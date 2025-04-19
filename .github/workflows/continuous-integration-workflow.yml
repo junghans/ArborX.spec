@@ -25,6 +25,9 @@ jobs:
       - name: Get source 
         run: spectool -g ArborX.spec
       - name: Build rpm
+        env:
+          OMPI_ALLOW_RUN_AS_ROOT: 1
+          OMPI_ALLOW_RUN_AS_ROOT_CONFIRM: 1
         run:  fedpkg mockbuild --use-koji-mock-config
       - uses: actions/upload-artifact@v4
         if: failure()
